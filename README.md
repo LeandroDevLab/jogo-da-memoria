@@ -35,7 +35,7 @@ Este é um jogo da memória simples desenvolvido em **HTML, CSS e JavaScript**. 
 ## 🚀 Como Executar o Projeto
 1. Baixe ou clone este repositório:
    ```sh
-   git clone https://github.com/leandrooliota/jogo-da-memoria.git
+   git clone https://github.com/leandrodevlab/jogo-da-memoria.git
    ```
 2. Abra o arquivo `index.html` em um navegador.
 3. Divirta-se jogando! 🎉
