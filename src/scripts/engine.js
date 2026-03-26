@@ -20,12 +20,33 @@ let openCards = [];
 let erros = document.getElementById("score");
 let contadorErros = parseInt(erros.textContent);
 let contadorAcertos = 0;
+const historico = localStorage.getItem("historicoMemoria")
+  ? JSON.parse(localStorage.getItem("historicoMemoria"))
+  : [];
 
 const buttonStart = document.querySelector(".start");
 const buttonReset = document.querySelector(".reset");
 
 //variável de randomização dos emojis
 let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
+
+//Função que armazena objeto de histórico de jogo
+function armazenarHistorico(acertos, erros, tempo, escore) {
+  const resultado = {
+    acertos: acertos,
+    erros: erros,
+    tempo: tempo,
+    escore: escore,
+    data: new Date().toLocaleString(),
+  };
+  historico.push(resultado);
+  localStorage.setItem("historicoMemoria", JSON.stringify(historico));
+}
+
+//Função de score final
+function scoreFinal(acertos, erros, time) {
+  return 100 + time * 2 - erros * 5 + acertos * 10;
+}
 
 function jogar() {
   for (let i = 0; i < emojis.length; i++) {
@@ -69,8 +90,21 @@ function checkMatch() {
 
   //Criando uma condição que declara o fim do jogo
   if (document.querySelectorAll(".boxMatch").length === emojis.length) {
+    let finalScoreVitoria = scoreFinal(
+      contadorAcertos,
+      contadorErros,
+      timeLeft,
+    );
     clearInterval(timer);
-    alert("Você venceu, parabéns! Clique em RESET GAME para jogar novamente!");
+    alert(
+      `🥳Você venceu, parabéns🥳! Clique em RESET GAME para jogar novamente! Sua pontuação final é: ${finalScoreVitoria}!!`,
+    );
+    armazenarHistorico(
+      contadorAcertos,
+      contadorErros,
+      timeLeft,
+      finalScoreVitoria,
+    );
   }
 }
 
@@ -89,7 +123,7 @@ function startCountdown() {
     } else {
       clearInterval(timer); // Para o contador quando chega a 0
       alert(
-        `Tempo esgotado, você acerto ${contadorAcertos} pares e cometeu ${contadorErros} erros`,
+        `😭Tempo esgotado, você acerto ${contadorAcertos} pares e cometeu ${contadorErros} erros!`,
       );
       buttonStart.disabled = false;
       buttonReset.classList.remove("show");
