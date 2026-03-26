@@ -1,103 +1,163 @@
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #fc1e8a;
-    user-select: none;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fc1e8a;
+  user-select: none;
 }
 
-.container{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    background: linear-gradient(
-        325deg,
-        #03001e 0%,
-        #7303c0 30%,
-        #ec38bc 70%,
-        #fdeff9 100%
-    );
-    padding: 40px 60px;
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background: linear-gradient(
+    325deg,
+    #03001e 0%,
+    #7303c0 30%,
+    #ec38bc 70%,
+    #fdeff9 100%
+  );
+  padding: 40px 60px;
 }
 
-h2{
-    font-size: 3em;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+h2 {
+  font-size: 3em;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.button {
+  padding: 15px 20px;
+  width: 100%;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #989898;
+}
+
+.button:focus {
+  color: #ec38bc;
+  background-color: #03001e;
 }
 
 .reset {
-    padding: 15px 20px;
-    width: 100%;
-    color: #000000;
-    background-color: #ffffff;
-    border: none;
-    font-size: 1.5em;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: 600;
+  margin-top: 50px;
+  display: none;
 }
 
-.reset:focus{
-    color:#ec38bc;
-    background-color: #03001e;
+.reset.show {
+  display: block;
 }
 
 .game {
-    width: 430px;
-    height: 430px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Espaçamento entre eles */
-    transform-style: preserve-3d;
-    perspective: 500px;
+  width: 430px;
+  height: 430px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espaçamento entre eles */
+  transform-style: preserve-3d;
+  perspective: 500px;
+  justify-content: center;
 }
 
 .item {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
-    font-size: 3em;
-    transform: rotateY(180deg);
-    transition: 0.25s;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  font-size: 3em;
+  transform: rotateY(180deg);
+  transition: 0.25s;
 }
 
-.item::after{
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: #404040;
-    /* opacity: 0.85;  só para verificar*/
-    transition: 0.25s;
-    transform: rotateY(0deg);
-    backface-visibility: hidden;
+.item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #404040;
+  /* opacity: 0.85;  só para verificar*/
+  transition: 0.15s;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
 }
 
 .item.boxOpen {
-    transform: rotateY(0deg);
+  transform: rotateY(0deg);
 }
 
 .boxOpen::after,
 .boxMatch::after {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-.container2{
+.container2 {
+  font-size: 2em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 100%;
+    padding: 20px 30px;
+  }
+
+  .game {
+    width: 90%;
+    height: 100%;
+    gap: 5px;
+    perspective: 300px;
+    margin: auto;
+  }
+
+  .item {
+    width: 75px;
+    height: 75px;
     font-size: 2em;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
+  }
+
+  h2 {
+    font-size: 2em;
+    text-align: center;
+  }
+}
+
+@media (max-width: 412px) {
+  .item {
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
+  }
+
+  .container2 {
+    font-size: 1.5em;
+  }
+}
+@media (max-width: 350px) {
+  .item {
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
+  }
 }
