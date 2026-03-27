@@ -26,6 +26,7 @@ const historico = localStorage.getItem("historicoMemoria")
 
 const buttonStart = document.querySelector(".start");
 const buttonReset = document.querySelector(".reset");
+const buttonHistorico = document.querySelector(".historico-button");
 
 //variável de randomização dos emojis
 let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
@@ -139,3 +140,8 @@ function playSound(audioName) {
   audio.play();
 }
 /* vou Incrementar número de erros e tempo para reload 💪😎 */
+
+function openHistorico() {
+  const historicoContainer = document.querySelector(".historico");
+  historicoContainer.classList.toggle("open");
+}
