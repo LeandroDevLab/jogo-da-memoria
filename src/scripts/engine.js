@@ -27,6 +27,28 @@ const historico = localStorage.getItem("historicoMemoria")
 const buttonStart = document.querySelector(".start");
 const buttonReset = document.querySelector(".reset");
 const buttonHistorico = document.querySelector(".historico-button");
+const historicoContainer = document.querySelector(".historico");
+
+function preencherHistorico() {
+  const div = document.createElement("div");
+  div.classList.add("historico-item");
+  const rankingByScore = [...historico].sort((a, b) => b.escore - a.escore);
+  const topScore = rankingByScore.slice(0, 5);
+  div.innerHTML = topScore
+    .map((item) => {
+      return `
+      <div class="historico-resultado">
+        <p><strong>Score Final:</strong> ${item.escore} pontos</p>
+        <p><strong>Acertos:</strong> ${item.acertos} | <strong>Erros:</strong> ${item.erros}</p>
+        <p><strong>Tempo Restante:</strong> ${item.tempo} segundos </p>
+        <p><strong>Data:</strong> ${item.data}</p>
+      </div>
+    `;
+    })
+    .join("");
+  historicoContainer.appendChild(div);
+}
+preencherHistorico();
 
 //variável de randomização dos emojis
 let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
@@ -106,6 +128,7 @@ function checkMatch() {
       timeLeft,
       finalScoreVitoria,
     );
+    window.location.reload();
   }
 }
 
