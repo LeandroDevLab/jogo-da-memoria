@@ -76,7 +76,11 @@ function armazenarHistorico(erros, tempo, escore) {
 
 //Função de score final
 function scoreFinal(erros, time) {
-  return 100 + time * 2 - erros * 5 + 80;
+  const erroValue = Number(erros) * 5;
+  const timeValue = Number(time) * 2;
+  const score = 180 + timeValue - erroValue;
+  console.log(score, timeValue, erroValue);
+  return score;
 }
 
 function jogar() {
