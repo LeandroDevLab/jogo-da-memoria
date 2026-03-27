@@ -173,6 +173,39 @@ h2 {
   gap: 50px;
 }
 
+/* ================= FOOTER ================== */
+footer {
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+
+.redes {
+  font-size: 24px;
+  display: flex;
+  gap: 10px;
+}
+
+.redes a {
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.5s ease-in-out;
+}
+
+.redes a:hover {
+  color: #0000ff;
+}
+.redes a:active {
+  color: #0000ff;
+  opacity: 0.5;
+}
+
+/* ================= MEDIA QUERIES ================== */
+
 @media (max-width: 500px) {
   .container {
     width: 100%;
