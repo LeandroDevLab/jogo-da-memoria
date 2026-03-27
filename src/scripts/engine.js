@@ -79,7 +79,8 @@ function scoreFinal(erros, time) {
   const erroValue = Number(erros) * 5;
   const timeValue = Number(time) * 2;
   const score = 180 + timeValue - erroValue;
-  console.log(score, timeValue, erroValue);
+  console.log("Score, timevalue e errovalue =>", score, timeValue, erroValue);
+  console.log("time e erro", time, erros);
   return score;
 }
 
@@ -125,16 +126,13 @@ function checkMatch() {
 
   //Criando uma condição que declara o fim do jogo
   if (document.querySelectorAll(".boxMatch").length === emojis.length) {
-    let finalScoreVitoria = scoreFinal(
-      contadorAcertos,
-      contadorErros,
-      timeLeft,
-    );
+    let tempo = Number(document.getElementById("time").textContent);
+    let finalScoreVitoria = scoreFinal(contadorErros, tempo);
     clearInterval(timer);
     alert(
       `🥳Você venceu, parabéns🥳! Clique em RESET GAME para jogar novamente! Sua pontuação final é: ${finalScoreVitoria}!!`,
     );
-    armazenarHistorico(contadorErros, timeLeft, finalScoreVitoria);
+    armazenarHistorico(contadorErros, tempo, finalScoreVitoria);
     window.location.reload();
   }
 }
