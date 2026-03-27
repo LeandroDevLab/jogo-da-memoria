@@ -80,9 +80,9 @@ Para testar o jogo basta [clicar aqui!](https://leandrodevlab.github.io/jogo-da-
 
 - 📱 **Responsividade (mobile)**
   - Ajuste de responsividade para mobile com ajustes finos para telas de:
-    - até 500px;
-    - até 412px;
-    - e até 350px.
+    - até 500px
+    - até 412px
+    - e até 350px
 
 ---
 
