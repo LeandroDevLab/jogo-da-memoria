@@ -27,7 +27,7 @@ const historico = localStorage.getItem("historicoMemoria")
 const buttonStart = document.querySelector(".start");
 const buttonReset = document.querySelector(".reset");
 const buttonHistorico = document.querySelector(".historico-button");
-const historicoContainer = document.querySelector(".historico");
+const historicoContainer = document.querySelector(".resultados");
 
 function preencherHistorico() {
   const div = document.createElement("div");
@@ -39,8 +39,8 @@ function preencherHistorico() {
       return `
       <div class="historico-resultado">
         <p><strong>Score Final:</strong> ${item.escore} pontos</p>
-        <p><strong>Acertos:</strong> ${item.acertos} | <strong>Erros:</strong> ${item.erros}</p>
         <p><strong>Tempo Restante:</strong> ${item.tempo} segundos </p>
+        <p><strong>Erros:</strong> ${item.erros}</p>
         <p><strong>Data:</strong> ${item.data}</p>
       </div>
     `;
@@ -50,13 +50,21 @@ function preencherHistorico() {
 }
 preencherHistorico();
 
+function limparHistorico() {
+  const confirmacao = confirm("Tem certeza que deseja limpar o histórico?");
+  if (!confirmacao) {
+    return;
+  }
+  localStorage.removeItem("historicoMemoria");
+  location.reload();
+}
+
 //variável de randomização dos emojis
 let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
 
 //Função que armazena objeto de histórico de jogo
-function armazenarHistorico(acertos, erros, tempo, escore) {
+function armazenarHistorico(erros, tempo, escore) {
   const resultado = {
-    acertos: acertos,
     erros: erros,
     tempo: tempo,
     escore: escore,
@@ -67,8 +75,8 @@ function armazenarHistorico(acertos, erros, tempo, escore) {
 }
 
 //Função de score final
-function scoreFinal(acertos, erros, time) {
-  return 100 + time * 2 - erros * 5 + acertos * 10;
+function scoreFinal(erros, time) {
+  return 100 + time * 2 - erros * 5 + 80;
 }
 
 function jogar() {
@@ -122,12 +130,7 @@ function checkMatch() {
     alert(
       `🥳Você venceu, parabéns🥳! Clique em RESET GAME para jogar novamente! Sua pontuação final é: ${finalScoreVitoria}!!`,
     );
-    armazenarHistorico(
-      contadorAcertos,
-      contadorErros,
-      timeLeft,
-      finalScoreVitoria,
-    );
+    armazenarHistorico(contadorErros, timeLeft, finalScoreVitoria);
     window.location.reload();
   }
 }
